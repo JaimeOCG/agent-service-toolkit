@@ -1,0 +1,9 @@
+{
+    "python.testing.pytestArgs": [
+        "-vv",
+        "--ignore=path/to/unwanted/test"
+    ],
+    "python.testing.pytestEnabled": true,
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "terminal.integrated.shellIntegration.enabled": false
+}

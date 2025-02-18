@@ -94,7 +94,8 @@ class Settings(BaseSettings):
     POSTGRES_MIN_SIZE: int = Field(
         default=3, description="Minimum number of connections in the pool"
     )
-    POSTGRES_MAX_IDLE: int = Field(default=5, description="Maximum number of idle connections")
+    POSTGRES_MAX_IDLE: int = Field(
+        default=5, description="Maximum number of idle connections")
 
     # Azure OpenAI Settings
     AZURE_OPENAI_API_KEY: SecretStr | None = None
@@ -164,7 +165,8 @@ class Settings(BaseSettings):
                     if not self.AZURE_OPENAI_ENDPOINT:
                         raise ValueError("AZURE_OPENAI_ENDPOINT must be set")
                     if not self.AZURE_OPENAI_DEPLOYMENT_MAP:
-                        raise ValueError("AZURE_OPENAI_DEPLOYMENT_MAP must be set")
+                        raise ValueError(
+                            "AZURE_OPENAI_DEPLOYMENT_MAP must be set")
 
                     # Parse deployment map if it's a string
                     if isinstance(self.AZURE_OPENAI_DEPLOYMENT_MAP, str):
@@ -173,13 +175,16 @@ class Settings(BaseSettings):
                                 self.AZURE_OPENAI_DEPLOYMENT_MAP
                             )
                         except Exception as e:
-                            raise ValueError(f"Invalid AZURE_OPENAI_DEPLOYMENT_MAP JSON: {e}")
+                            raise ValueError(
+                                f"Invalid AZURE_OPENAI_DEPLOYMENT_MAP JSON: {e}")
 
                     # Validate required deployments exist
                     required_models = {"gpt-4o", "gpt-4o-mini"}
-                    missing_models = required_models - set(self.AZURE_OPENAI_DEPLOYMENT_MAP.keys())
+                    missing_models = required_models - \
+                        set(self.AZURE_OPENAI_DEPLOYMENT_MAP.keys())
                     if missing_models:
-                        raise ValueError(f"Missing required Azure deployments: {missing_models}")
+                        raise ValueError(
+                            f"Missing required Azure deployments: {missing_models}")
                 case _:
                     raise ValueError(f"Unknown provider: {provider}")
 
